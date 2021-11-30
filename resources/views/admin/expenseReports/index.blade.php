@@ -19,7 +19,8 @@
                 <div class="col-3 form-group">
                     <label class="control-label" for="m">{{ trans('global.month') }}</label>
                     <select name="m" for="m" class="form-control">
-                        @foreach(cal_info(0)['months'] as $month)
+                        <?php $months = ['January','February','March','April'.'May','June','July','August','September','October','November','December']; ?>
+                        @foreach($months as $month)
                             <option value="{{ $month }}" @if($month===old('m', Request::get('m', date('m')))) selected @endif>
                                 {{ $month }}
                             </option>
