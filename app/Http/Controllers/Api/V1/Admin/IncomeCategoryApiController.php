@@ -15,7 +15,7 @@ class IncomeCategoryApiController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('income_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('income_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return new IncomeCategoryResource(IncomeCategory::with(['created_by'])->get());
     }
@@ -31,7 +31,7 @@ class IncomeCategoryApiController extends Controller
 
     public function show(IncomeCategory $incomeCategory)
     {
-        abort_if(Gate::denies('income_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('income_category_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return new IncomeCategoryResource($incomeCategory->load(['created_by']));
     }
@@ -47,7 +47,7 @@ class IncomeCategoryApiController extends Controller
 
     public function destroy(IncomeCategory $incomeCategory)
     {
-        abort_if(Gate::denies('income_category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // abort_if(Gate::denies('income_category_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $incomeCategory->delete();
 

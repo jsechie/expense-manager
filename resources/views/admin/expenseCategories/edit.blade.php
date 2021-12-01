@@ -24,6 +24,9 @@
             </div>
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <a style="" class="btn btn-default pull-right" href="{{ url()->previous() }}">
+                {{ trans('global.back_to_list') }}
+            </a>
             </div>
         </form>
 
