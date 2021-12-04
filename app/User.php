@@ -2,16 +2,17 @@
 
 namespace App;
 
-use App\Notifications\VerifyUserNotification;
-use Carbon\Carbon;
 use Hash;
-use Illuminate\Auth\Notifications\ResetPassword;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\PettyCash;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\VerifyUserNotification;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Auth\Notifications\ResetPassword;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -99,5 +100,10 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function pettyCash()
+    {
+        return $this->hasMany(PettyCash::class,'requested_by');
     }
 }

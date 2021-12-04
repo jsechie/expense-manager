@@ -1,14 +1,15 @@
 <?php
 
 Route::redirect('/', '/login');
+Route::redirect('/register', '/login');
 Route::redirect('/home', '/admin');
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
-    Route::redirect('/', '/admin/expenses');
-    // Permissions
-    Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
-    Route::resource('permissions', 'PermissionsController');
+    Route::redirect('/', '/admin/petty-cash');
+    // // Permissions
+    // Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
+    // Route::resource('permissions', 'PermissionsController');
 
     // Roles
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
@@ -37,4 +38,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Expensereports
     Route::delete('expense-reports/destroy', 'ExpenseReportController@massDestroy')->name('expense-reports.massDestroy');
     Route::resource('expense-reports', 'ExpenseReportController');
+
+    //Dashborad
+
+
+    //Petty Cash
+    Route::get('petty-cash/process/archive', 'PettyCashController@archive')->name('petty-cash.archive');
+    Route::get('petty-cash/process/reimburse', 'PettyCashController@reimburse')->name('petty-cash.reimburse');
+    Route::get('petty-cash/process/receive', 'PettyCashController@processReceive')->name('petty-cash.processReceive');
+    Route::get('petty-cash/process/approve', 'PettyCashController@processApprove')->name('petty-cash.processApprove');
+    Route::resource('petty-cash', 'PettyCashController');
+    Route::get('petty-cash/{pettyCash}/withdraw', 'PettyCashController@withdraw')->name('petty-cash.withdraw');
+    Route::get('petty-cash/{pettyCash}/approve', 'PettyCashController@approve')->name('petty-cash.approve');
+    Route::get('petty-cash/{pettyCash}/receive', 'PettyCashController@receive')->name('petty-cash.receive');
+    Route::get('petty-cash/{pettyCash}/pay', 'PettyCashController@pay')->name('petty-cash.pay');
+    Route::get('petty-cash/{pettyCash}/reject', 'PettyCashController@reject')->name('petty-cash.reject');
 });

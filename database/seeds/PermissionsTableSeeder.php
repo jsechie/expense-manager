@@ -260,6 +260,44 @@ class PermissionsTableSeeder extends Seeder
                 'created_at' => '2019-09-13 19:21:30',
                 'updated_at' => '2019-09-13 19:21:30',
             ],
+
+            [
+                'id'         => '43',
+                'title'      => 'petty_cash_create',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '44',
+                'title'      => 'petty_cash_edit',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '45',
+                'title'      => 'petty_cash_show',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '46',
+                'title'      => 'petty_cash_delete',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '47',
+                'title'      => 'petty_cash_access',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+
+            [
+                'id'         => '48',
+                'title'      => 'petty_cash_process',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
         ];
 
         Permission::insert($permissions);

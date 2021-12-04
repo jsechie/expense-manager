@@ -53,6 +53,9 @@
 
 
         </ul>
+        <div class="pull-right mr-5">
+          {{auth()->user()->name}}
+        </div>
     </header>
 
     <div class="app-body">

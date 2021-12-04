@@ -11,16 +11,7 @@
                         {{ trans('cruds.userManagement.title') }}
                     </a>
                     <ul class="nav-dropdown-items">
-                        @can('permission_access')
-                            <li class="nav-item">
-                                <a href="{{ route("admin.permissions.index") }}" class="nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
-                                    <i class="fa-fw fas fa-unlock-alt nav-icon">
-
-                                    </i>
-                                    {{ trans('cruds.permission.title') }}
-                                </a>
-                            </li>
-                        @endcan
+                        
                         @can('role_access')
                             <li class="nav-item">
                                 <a href="{{ route("admin.roles.index") }}" class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
@@ -95,7 +86,7 @@
                 </li>
             @endcan
 
-            <!-- @can('user_management_access') -->
+            @can('petty_cash_access')
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle" href="#">
                         <i class="fa-fw fas fa-calculator nav-icon">
@@ -104,29 +95,60 @@
                         {{ __('Petty Cash') }}
                     </a>
                     <ul class="nav-dropdown-items">
-                        <!-- @can('permission_access') -->
+                        @can('petty_cash_create')
                             <li class="nav-item">
-                                <a href="#" class="text-warning nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.petty-cash.index') }}" class="text-warning nav-link {{ request()->is('admin/petty-cash/') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-book nav-icon">
 
                                     </i>
-                                    {{ __('Request Petty Cash') }}
+                                    {{ __('Make A Request') }}
                                 </a>
                             </li>
-                        <!-- @endcan -->
-                        <!-- @can('role_access') -->
+                        @endcan
+                        @can('petty_cash_process')
                             <li class="nav-item">
-                                <a href="#" class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
+                                <a href="{{ route('admin.petty-cash.processApprove') }}" class="nav-link {{ request()->is('admin/petty-cash/process/approve') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-briefcase nav-icon">
 
                                     </i>
-                                    {{ __('Petty Cash Received') }}
+                                    {{ __('Approve Request') }}
                                 </a>
                             </li>
-                        <!-- @endcan -->
+                        @endcan
+                        @can('petty_cash_process')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.petty-cash.processReceive') }}" class="nav-link {{ request()->is('admin/petty-cash/process/receive') ? 'active' : '' }}">
+                                    <i class="fa-fw fas fa-briefcase nav-icon">
+
+                                    </i>
+                                    {{ __('Receive Request') }}
+                                </a>
+                            </li>
+                        @endcan
+                        
+                        @can('petty_cash_process')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.petty-cash.reimburse') }}" class="nav-link {{ request()->is('admin/petty-cash/process/reimburse') ? 'active' : '' }}">
+                                    <i class="fa-fw fas fa-briefcase nav-icon">
+
+                                    </i>
+                                    {{ __('Reimburse') }}
+                                </a>
+                            </li>
+                        @endcan
+                        @can('petty_cash_process')
+                            <li class="nav-item">
+                                <a href="{{ route('admin.petty-cash.archive') }}" class="nav-link {{ request()->is('admin/petty-cash/process/archive') ? 'active' : '' }}">
+                                    <i class="fa-fw fas fa-briefcase nav-icon">
+
+                                    </i>
+                                    {{ __('Archived Requests') }}
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
-            <!-- @endcan -->
+            @endcan
             @can('expense_report_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.expense-reports.index") }}" class="nav-link {{ request()->is('admin/expense-reports') || request()->is('admin/expense-reports/*') ? 'active' : '' }}">
