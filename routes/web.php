@@ -3,7 +3,7 @@
 Route::redirect('/', '/login');
 Route::redirect('/register', '/login');
 Route::redirect('/home', '/admin');
-Auth::routes();
+Auth::routes(['register' => false,]);
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::redirect('/', '/admin/petty-cash');
@@ -53,4 +53,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('petty-cash/{pettyCash}/receive', 'PettyCashController@receive')->name('petty-cash.receive');
     Route::get('petty-cash/{pettyCash}/pay', 'PettyCashController@pay')->name('petty-cash.pay');
     Route::get('petty-cash/{pettyCash}/reject', 'PettyCashController@reject')->name('petty-cash.reject');
+
+    //Dashboard
+    // Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
+
+    //profile
+    Route::get('profile', 'ProfileController@index')->name('profile.index');
+    Route::post('profile/password', 'ProfileController@password')->name('profile.password');
 });

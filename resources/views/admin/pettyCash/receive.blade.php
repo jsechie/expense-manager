@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@include('partials.messages')
 <div class="card">
     <div class="card-header">
         List Of Requests Awaiting to be Received
@@ -59,6 +60,8 @@
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.petty-cash.show', $pettyCash->id) }}">
                                         View
                                     </a>
+                                @endcan
+                                @can('petty_cash_receive')
                                     <a class="btn btn-xs btn-success" href="{{ route('admin.petty-cash.receive', $pettyCash->id) }}">
                                     Accept
                                     </a>

@@ -21,7 +21,6 @@ class PettyCashController extends Controller
     {
         if(auth()->user()->can('petty_cash_create')){
             $pettyCashes = PettyCash::where('requested_by',auth()->user()->id)->get();
-
             return view('admin.pettyCash.index', compact('pettyCashes'));
         }
         else{
@@ -53,13 +52,13 @@ class PettyCashController extends Controller
                 'amount' => ['required'],
                 'description' => ['required', 'string'],
             ]);
-            PettyCash::create([
+            $pettyCash = PettyCash::create([
                 'receipt_date' => $request->receipt_date,
                 'amount' => $request->amount,
                 'description' => $request->description,
                 'requested_by' => auth()->user()->id,
             ]);
-            return back();
+            return redirect()->back()->with('flash_message_success'," Cash Request submitted with Request #$pettyCash->id");;
         }
         else{
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -125,7 +124,8 @@ class PettyCashController extends Controller
                 'status' => 'withdrawn'
             ]);
 
-            return back();
+            return redirect()->back()->with('flash_message_success'," Cash Request with Request #$pettyCash->id successfully withdrawn.<br>
+                                            This request will no longer be processed");;
         }
         else{
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -134,13 +134,14 @@ class PettyCashController extends Controller
 
     public function approve(PettyCash $pettyCash)
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_approve')){
             $pettyCash->update([
                 'status' => 'approved',
                 'approved_by' => auth()->user()->id,
             ]);
 
-            return back();
+            return redirect()->back()->with('flash_message_success'," Request #$pettyCash->id successfully APPROVED
+                                            <br>Sent for receiving.........");;
         }
         else{
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -149,13 +150,14 @@ class PettyCashController extends Controller
 
     public function reject(PettyCash $pettyCash)
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_approve')){
             $pettyCash->update([
                 'status' => 'rejected',
                 'approved_by' => auth()->user()->id,
             ]);
 
-            return back();
+            return redirect()->back()->with('flash_message_error'," Request #$pettyCash->id successfully REJECTED
+                                            <br>User will be notified .........");;
         }
         else{
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -164,13 +166,14 @@ class PettyCashController extends Controller
 
     public function receive(PettyCash $pettyCash)
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_receive')){
             $pettyCash->update([
                 'status' => 'received',
                 'received_by' => auth()->user()->id,
             ]);
 
-            return back();
+            return redirect()->back()->with('flash_message_success'," Request #$pettyCash->id successfully RECEIVED
+                                            <br>Sent for REINBURSEMENT.........");;
         }
         else{
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -179,7 +182,7 @@ class PettyCashController extends Controller
 
     public function pay(PettyCash $pettyCash)
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_reimburse')){
             $pettyCash->update([
                 'status' => 'paid',
             ]);
@@ -189,7 +192,8 @@ class PettyCashController extends Controller
                 'entry_date' => date('Y-m-d'),
                 'expense_category_id' => 1,
             ]);
-            return back();
+            return redirect()->back()->with('flash_message_success'," Request #$pettyCash->id successfully PAID
+                                            <br>Sent for Archiving and Adding to Company Expenses.......");;
         }
         else{
             abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -198,7 +202,7 @@ class PettyCashController extends Controller
 
     public function processApprove()
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_approve')){
             $pettyCashes = PettyCash::where('status','pending review')->get();
 
             return view('admin.pettyCash.approve', compact('pettyCashes'));
@@ -212,7 +216,7 @@ class PettyCashController extends Controller
 
     public function processReceive()
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_receive')){
             $pettyCashes = PettyCash::where('status','approved')->get();
 
             return view('admin.pettyCash.receive', compact('pettyCashes'));
@@ -226,7 +230,7 @@ class PettyCashController extends Controller
 
     public function reimburse()
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_reimburse')){
             $pettyCashes = PettyCash::where('status','received')->get();
 
             return view('admin.pettyCash.reimburse', compact('pettyCashes'));
@@ -240,7 +244,7 @@ class PettyCashController extends Controller
 
     public function archive()
     {
-        if(auth()->user()->can('petty_cash_process')){
+        if(auth()->user()->can('petty_cash_archive_access')){
             $pettyCashes = PettyCash::where('status','paid')->get();
 
             return view('admin.pettyCash.archive', compact('pettyCashes'));

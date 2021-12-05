@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('content')
 @can('petty_cash_create')
-
+@include('partials.messages')
     <div class="card">
         <div class="card-header d-flex p-0">
-        <h3 class="card-title p-3">Petty Cash</h3>
+        <h3 class="card-title p-3">My Petty Cash Lists</h3>
         <ul class="nav nav-pills ml-auto p-2">
             <li class="nav-item"><a class="nav-link " href="#make-request" data-toggle="tab">Make New Request</a></li>
             <li class="nav-item"><a class="nav-link active" href="#my-request" data-toggle="tab">My Petty Cash</a></li>

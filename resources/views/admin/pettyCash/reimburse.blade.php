@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@include('partials.messages')
 <div class="card">
     <div class="card-header">
         List Of Requests Pending for Reimbursement
@@ -59,6 +60,8 @@
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.petty-cash.show', $pettyCash->id) }}">
                                         View
                                     </a>
+                                @endcan
+                                @can('petty_cash_reimburse')
                                     <a class="btn btn-xs btn-success" href="{{ route('admin.petty-cash.pay', $pettyCash->id) }}">
                                     Mark as Paid
                                     </a>

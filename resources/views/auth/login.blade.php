@@ -60,9 +60,6 @@
                                 <a class="btn btn-link px-0" href="{{ route('password.request') }}">
                                     {{ trans('global.forgot_password') }}
                                 </a>
-                                <br><a class="btn btn-link px-0" href="{{ route('register') }}">
-                                    {{ trans('global.register') }}
-                                </a>
                             </div>
                         </div>
                     </form>

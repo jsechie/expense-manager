@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+@include('partials.messages')
 <div class="card">
     <div class="card-header">
         List Of Archived Petty Cash Requests

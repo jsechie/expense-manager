@@ -294,7 +294,31 @@ class PermissionsTableSeeder extends Seeder
 
             [
                 'id'         => '48',
-                'title'      => 'petty_cash_process',
+                'title'      => 'petty_cash_approve',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '49',
+                'title'      => 'petty_cash_receive',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '50',
+                'title'      => 'petty_cash_reimburse',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '51',
+                'title'      => 'petty_cash_archive_access',
+                'created_at' => '2019-09-13 19:21:30',
+                'updated_at' => '2019-09-13 19:21:30',
+            ],
+            [
+                'id'         => '52',
+                'title'      => 'dashboard_access',
                 'created_at' => '2019-09-13 19:21:30',
                 'updated_at' => '2019-09-13 19:21:30',
             ],

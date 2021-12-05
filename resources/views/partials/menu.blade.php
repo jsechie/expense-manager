@@ -35,16 +35,7 @@
                     </ul>
                 </li>
             @endcan
-            @can('expense_category_access')
-                <li class="nav-item">
-                    <a href="#" class="nav-link {{ request()->is('admin/expense-categories') || request()->is('admin/expense-categories/*') ? 'active' : '' }}">
-                        <i class="fa-fw fas fa-list nav-icon">
-
-                        </i>
-                        {{ __('Dashboard') }}
-                    </a>
-                </li>
-            @endcan
+            <hr>
             @can('expense_category_access')
                 <li class="nav-item">
                     <a href="{{ route("admin.expense-categories.index") }}" class="nav-link {{ request()->is('admin/expense-categories') || request()->is('admin/expense-categories/*') ? 'active' : '' }}">
@@ -86,6 +77,17 @@
                 </li>
             @endcan
 
+            @can('expense_report_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.expense-reports.index") }}" class="nav-link {{ request()->is('admin/expense-reports') || request()->is('admin/expense-reports/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-chart-line nav-icon">
+
+                        </i>
+                        {{ trans('cruds.expenseReport.title') }}
+                    </a>
+                </li>
+            @endcan
+            
             @can('petty_cash_access')
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle" href="#">
@@ -105,7 +107,7 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('petty_cash_process')
+                        @can('petty_cash_approve')
                             <li class="nav-item">
                                 <a href="{{ route('admin.petty-cash.processApprove') }}" class="nav-link {{ request()->is('admin/petty-cash/process/approve') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-briefcase nav-icon">
@@ -115,7 +117,7 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('petty_cash_process')
+                        @can('petty_cash_receive')
                             <li class="nav-item">
                                 <a href="{{ route('admin.petty-cash.processReceive') }}" class="nav-link {{ request()->is('admin/petty-cash/process/receive') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-briefcase nav-icon">
@@ -126,7 +128,7 @@
                             </li>
                         @endcan
                         
-                        @can('petty_cash_process')
+                        @can('petty_cash_reimburse')
                             <li class="nav-item">
                                 <a href="{{ route('admin.petty-cash.reimburse') }}" class="nav-link {{ request()->is('admin/petty-cash/process/reimburse') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-briefcase nav-icon">
@@ -136,7 +138,7 @@
                                 </a>
                             </li>
                         @endcan
-                        @can('petty_cash_process')
+                        @can('petty_cash_archive_access')
                             <li class="nav-item">
                                 <a href="{{ route('admin.petty-cash.archive') }}" class="nav-link {{ request()->is('admin/petty-cash/process/archive') ? 'active' : '' }}">
                                     <i class="fa-fw fas fa-briefcase nav-icon">
@@ -149,17 +151,15 @@
                     </ul>
                 </li>
             @endcan
-            @can('expense_report_access')
-                <li class="nav-item">
-                    <a href="{{ route("admin.expense-reports.index") }}" class="nav-link {{ request()->is('admin/expense-reports') || request()->is('admin/expense-reports/*') ? 'active' : '' }}">
-                        <i class="fa-fw fas fa-chart-line nav-icon">
+            <hr>
+            <li class="nav-item">
+                <a href="{{ route('admin.profile.index') }}" class="nav-link {{ request()->is('admin/profile') }}">
+                    <i class="fa-fw fas fa-wrench nav-icon">
 
-                        </i>
-                        {{ trans('cruds.expenseReport.title') }}
-                    </a>
-                </li>
-            @endcan
-
+                    </i>
+                    {{ __('Profile Settings') }}
+                </a>
+            </li>
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
